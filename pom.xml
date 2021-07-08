@@ -5,7 +5,7 @@
 	
 	<groupId>mosaic</groupId>
 	<artifactId>mosaic-starter-api</artifactId>
-	<version>0.0</version>
+	<version>0.1</version>
 	<packaging>war</packaging>
 	<name>starter-api</name>
 	<description>Mosaic Starter Back-end project for Spring Boot</description>
@@ -40,10 +40,19 @@
 	</dependencies>
 
 	<build>
+		<!-- Se cambia el nombre para poder deployar en Tomcat con version-->
+		<finalName>${project.name}##${project.version}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>build-info</goal>
+						</goals>
+					</execution>
+			   </executions>
 			</plugin>
 		</plugins>
 	</build>
