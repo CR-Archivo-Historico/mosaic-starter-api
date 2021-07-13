@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 @Repository
-public class InfoRepository {
+public class AppInfoRepository {
 
 	    // Spring Boot will create and configure DataSource and JdbcTemplate
 	    @Autowired

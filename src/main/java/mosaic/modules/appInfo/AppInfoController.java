@@ -1,4 +1,4 @@
-package mosaic.controller;
+package mosaic.modules.appInfo;
 
 import java.util.logging.Logger;
 
@@ -9,36 +9,51 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+//import mosaic.modules.appInfo.AppInfo;
+
 //import org.springframework.jdbc.core.JdbcTemplate;
 
-import mosaic.modules.appInfo.InfoRepository;
+//import mosaic.modules.appInfo.AppInfoRepository;
+//import mosaic.modules.appInfo.AppInfoService;
 
 @RestController
 @RequestMapping("/api")
 @CrossOrigin("*")
 
-public class ApiController {
+public class AppInfoController {
 
 	@Autowired
 	BuildProperties buildProperties;
+
+	@Autowired
+    private AppInfoService appInfoService;
 	
 	// Spring Boot will create and configure DataSource and JdbcTemplate
     // To use it, just @Autowired
     @Autowired
-    private InfoRepository infoRepository;
+    private AppInfoRepository infoRepository;
     //private JdbcTemplate jdbcTemplate;
 
-	private static Logger logger = Logger.getLogger(ApiController.class.getName());
+	private static Logger logger = Logger.getLogger(AppInfoService.class.getName());
 
 	/******************************************************************************************
 	 * System info
 	 ******************************************************************************************/
 
-	@GetMapping("/info")
+	@GetMapping("/info2")
 	public BuildProperties jinfoProp() {
 		logger.info("Inicio ApiController infoProp");
 		
 		return buildProperties;
+	}
+
+	@GetMapping("/info")
+	public AppInfo info() {
+		logger.info("Inicio ApiController info");
+		
+		AppInfo resp = appInfoService.getInfo();
+		
+		return resp;
 	}
 
 	@GetMapping("/infodb")
