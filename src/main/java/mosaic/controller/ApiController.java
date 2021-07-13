@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import mosaic.modules.info.InfoRepository;
+
 @RestController
 @RequestMapping("/api")
 @CrossOrigin("*")
@@ -22,7 +24,8 @@ public class ApiController {
 	// Spring Boot will create and configure DataSource and JdbcTemplate
     // To use it, just @Autowired
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private InfoRepository infoRepository;
+    //private JdbcTemplate jdbcTemplate;
 
 	private static Logger logger = Logger.getLogger(ApiController.class.getName());
 
@@ -41,7 +44,8 @@ public class ApiController {
 	public Integer infoDb() {
 		logger.info("Inicio ApiController infoDb");
 		
-		Integer resp = jdbcTemplate.queryForObject("select count(*) from db", Integer.class);
+		//Integer resp = jdbcTemplate.queryForObject("select count(*) from db", Integer.class);
+		Integer resp = infoRepository.count();
 
         return resp;
 	}
