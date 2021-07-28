@@ -1,5 +1,6 @@
 package mosaic.modules.appInfo;
 
+import java.util.logging.Logger;
 import org.springframework.stereotype.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -11,17 +12,26 @@ public class AppInfoRepository {
 	    @Autowired
 	    private JdbcTemplate jdbcTemplate;
 
-	    public Integer count() {
+		private static Logger logger = Logger.getLogger(AppInfoController.class.getName());
+
+		
+	    public String dbVersion() {
+	    	logger.info("Inicio AppInfoRepository/dbVersion");
+	    	
+    		String resp;
+	        resp = jdbcTemplate
+	                .queryForObject("select version()", String.class);
+
+			logger.info(resp.toString());
+			logger.info("Fin AppInfoRepository/dbVersion");
+			
+			return resp;
+	    }
+
+		public Integer count() {
 	    	Integer resp;
 	        resp = jdbcTemplate
 	                .queryForObject("select count(*) from db", Integer.class);
-	        return resp;
-	    }
-
-	    public String dbVersion() {
-	    	String resp;
-	        resp = jdbcTemplate
-	                .queryForObject("select version()", String.class);
 	        return resp;
 	    }
 
